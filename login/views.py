@@ -19,13 +19,13 @@ def home(request):
         if form.is_valid():
             if Register.objects.filter(username=request.POST['username'], password=request.POST['password']).exists():
                 content = {'Login successful!'}
-                print(content)
+                return render(request,'register.html', {'content':content})
             else:
                 content={'incorrect username/password'}
-                print(content)
+                return render(request,'register.html', {'content':content})
         else:
             content={'Invalid request'}
-            print(content)
+            return render(request,'register.html', {'content':content})
     else:
         form=LoginForm()
     return render(request,'index.html', {'form':form})
@@ -36,22 +36,22 @@ def register(request):
         if form.is_valid():
             if Register.objects.filter(username=request.POST['username']).exists():
                 content = {'Username taken!'}
-                print(content)
+                return render(request,'register.html', {'content':content})
             elif request.POST['password']!=request.POST['repeatpassword']:
                 content={'Password does not match'}
-                print(content)
+                return render(request,'register.html', {'content':content})
             elif request.POST['password']==request.POST['repeatpassword']:
                 user=form.save(commit=False)
                 user.user=request.user
                 user.save()
                 content={'Account created successfully!'}
-                print(content)
+                return render(request,'register.html', {'content':content})
             else:
                 content={'Unkwon error'}
-                print(content)
+                return render(request,'register.html', {'content':content})
         else:
             content={'Invalid request'}
-            print(content)
+            return render(request,'register.html', {'content':content})
     else:
         form=RegisterForm()
     return render(request,'register.html', {'form':form})

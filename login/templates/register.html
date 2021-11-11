@@ -1,0 +1,9 @@
+{%extends 'base.html'%} {%load bootstrap4%} {%load static%} {%block content%}
+<form action="#contact" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %} {% bootstrap_form form %}
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary btn-sm" style="border-radius: 20px; width: 100%;" value="Send">
+    </div>
+    <input type="hidden" name="next" value="{{next}}">
+</form>
+{%endblock%}

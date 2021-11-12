@@ -66,7 +66,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'rest_framework',
-    'bootstrap4'
+    'bootstrap4',
+    'rest_framework.authtoken'
+
 ]
 
 MIDDLEWARE = [
@@ -100,7 +102,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Authentication.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -164,7 +170,10 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+#The Hasher you are using
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+)
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 

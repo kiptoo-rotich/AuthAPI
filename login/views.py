@@ -68,7 +68,7 @@ def register(request):
 
 class HomeView(APIView):
     def get(self, request, format=None):
-        all_users=Login.objects.all()
+        all_users=Register.objects.all()
         serializers=LoginSerializer(all_users,many=True)
         return Response(serializers.data)
     def post(self, request, format=None):
